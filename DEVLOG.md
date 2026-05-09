@@ -67,3 +67,24 @@ filtering to project-relevant concepts only
 - Upgrade web_search to Tavily API on Day 5
 
 ---
+
+## Day 04 · 11.05.2026
+**Focus:** Connect MCP server to real AI agent
+
+**Deliverables:**
+- agent.py built — connects MCP tools to Groq LLM
+- Agent correctly picks calculate for math questions
+- Agent correctly picks Tavily search for research questions
+- Tool results fed back to LLM via ToolMessage for final answer
+
+**Key Technical Decisions:**
+- temperature=0 added for reliable tool call generation
+- Switched from DuckDuckGo to Tavily — built specifically for AI agents
+- TavilySearch replaces TavilySearchResults (deprecated in LangChain 1.x)
+
+**Blockers:**
+- llama3-groq-70b-8192-tool-use-preview decommissioned by Groq
+- TavilySearchResults deprecated — migrated to langchain-tavily package
+
+**Planned:**
+- Day 5: LangGraph intro — build first graph node
