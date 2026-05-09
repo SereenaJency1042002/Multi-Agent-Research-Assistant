@@ -1,6 +1,6 @@
 # Development Log
 ## Multi-Agent Research Assistant
-Sereena Jency · TH Köln · Automation & IT Masters
+Sereena Jency · TH Köln · Automation & IT Masters · Artificial Intelligence and and Data science Bachelors
 
 ---
 
