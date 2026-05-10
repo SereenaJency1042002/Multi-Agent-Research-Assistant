@@ -88,3 +88,33 @@ filtering to project-relevant concepts only
 
 **Planned:**
 - Day 5: LangGraph intro — build first graph node
+
+---
+
+## Day 05 · 12.05.2026
+**Focus:** LangGraph multi-agent pipeline
+
+**Deliverables:**
+- research_graph.py built with 4 specialized agents
+- Planner breaks question into 3 sub-tasks
+- Searcher fetches web results for each sub-task
+- Analyst extracts 5 key insights from results
+- Writer produces structured professional report
+- Full pipeline tested end to end successfully
+
+**Key Technical Decisions:**
+- ResearchState TypedDict shared across all agents
+- Each agent reads state, does one job, writes back to state
+- LangGraph controls flow: Planner→Searcher→Analyst→Writer
+- set_entry_point and add_edge define the pipeline sequence
+
+**Self-tested:** 
+Pipeline verified with 3 different questions —
+ROS2, AI in robotics, LangChain vs LangGraph — all produced
+accurate structured reports
+
+
+**Blockers:** None
+
+**Planned:**
+- Day 6: Add LangSmith tracing to see every agent step
