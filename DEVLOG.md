@@ -4,14 +4,6 @@ Sereena Jency · TH Köln · Automation & IT Masters · Artificial Intelligence 
 
 ---
 
-| Date | Day | Focus | Status |
-|------|-----|-------|--------|
-| 08.05.2026 | 01 | Environment setup + MCP fundamentals | ✅ |
-| 09.05.2026 | 02 | Calculator MCP server | ✅ |
-| 10.05.2026 | 03 | Complete MCP server — 3 tools | ✅ |
-
----
-
 ## Day 01 · 08.05.2026
 **Focus:** Development environment + MCP architecture
 
@@ -118,3 +110,24 @@ accurate structured reports
 
 **Planned:**
 - Day 6: Add LangSmith tracing to see every agent step
+
+---
+
+## Day 06 · 13.05.2026
+**Focus:** LangSmith observability and tracing
+
+**Deliverables:**
+- LangSmith integrated into research_graph.py
+- All agent steps now visible in LangSmith dashboard
+- Trace confirmed: 0% error rate, 7.83s latency
+- Pipeline fully observable end to end
+
+**Key Technical Decisions:**
+- LANGCHAIN_TRACING_V2 enables automatic tracing
+- Project name organizes traces by project in dashboard
+- LangSmith shows every LLM call, tool use, and agent decision
+
+**Blockers:** None
+
+**Planned:**
+- Day 7: Build Streamlit UI for the pipeline
