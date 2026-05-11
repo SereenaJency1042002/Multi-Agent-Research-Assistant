@@ -131,3 +131,28 @@ accurate structured reports
 
 **Planned:**
 - Day 7: Build Streamlit UI for the pipeline
+
+---
+
+## Day 07 · 11.05.2026
+**Focus:** Streamlit UI — MARA web application
+
+**Deliverables:**
+- MARA.py built — full web interface for research pipeline
+- User can type any question and receive structured report
+- Progress status shown during agent execution
+- Sub-tasks and insights displayed in expandable sections
+- Final report rendered in clean markdown format
+
+**Key Technical Decisions:**
+- st.status() shows live progress during 30 second pipeline
+- st.expander() organises sub-tasks and insights cleanly
+- Named MARA — Multi-Agent Research Assistant
+- Pipeline runs end to end inside Streamlit
+
+**Blockers:**
+- KeyError on insights — fixed by using correct dictionary key
+- TypeError on list — fixed with isinstance check
+
+**Planned:**
+- Day 8: Deploy MARA on Streamlit Cloud with public URL

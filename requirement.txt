@@ -1,0 +1,10 @@
+langchain
+langchain-groq
+langchain-tavily
+langchain-community
+langchain-mcp-adapters
+langgraph
+streamlit
+tavily-python
+python-dotenv
+mcp
