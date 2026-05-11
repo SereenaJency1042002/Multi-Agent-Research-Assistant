@@ -1,4 +1,4 @@
-# Multi-Agent-Research-Assistant# MARA — Multi-Agent Research Assistant
+# MARA — Multi-Agent Research Assistant
 
 > Powered by LangGraph · MCP · Groq · Tavily · LangSmith
 
