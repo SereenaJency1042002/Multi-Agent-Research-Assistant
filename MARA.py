@@ -11,9 +11,13 @@ from langgraph.graph import StateGraph, END
 
 load_dotenv()
 
+if hasattr(st, 'secrets'):
+    for key in st.secrets:
+        os.environ[key] = st.secrets[key]
+
 os.environ["LANGCHAIN_TRACING_V2"] = "true"
-os.environ["LANGCHAIN_API_KEY"] = os.getenv("LANGSMITH_API_KEY")
-os.environ["LANGCHAIN_PROJECT"] = os.getenv("LANGSMITH_PROJECT")
+os.environ["LANGCHAIN_API_KEY"] = st.secrets.get("LANGSMITH_API_KEY", os.getenv("LANGSMITH_API_KEY", ""))
+os.environ["LANGCHAIN_PROJECT"] = st.secrets.get("LANGSMITH_PROJECT", os.getenv("LANGSMITH_PROJECT", ""))
 
 #SHARED STATE - MEMORY SHARED BETWEEN AGENTS; EACH AGENT READS FROM IT 
 class ResearchState(TypedDict):
