@@ -10,6 +10,10 @@ from langgraph.graph import StateGraph, END
 
 load_dotenv()
 
+os.environ["LANGCHAIN_TRACING_V2"] = "true"
+os.environ["LANGCHAIN_API_KEY"] = os.getenv("LANGSMITH_API_KEY")
+os.environ["LANGCHAIN_PROJECT"] = os.getenv("LANGSMITH_PROJECT")
+
 #SHARED STATE - MEMORY SHARED BETWEEN AGENTS; EACH AGENT READS FROM IT 
 class ResearchState(TypedDict):
     question:           str             #original user question
