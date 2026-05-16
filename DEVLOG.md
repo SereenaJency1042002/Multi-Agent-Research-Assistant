@@ -1,37 +1,49 @@
-# Development Log
+# Dev Log — MARA
 ## Multi-Agent Research Assistant
-Sereena Jency · TH Köln · Automation & IT Masters · Artificial Intelligence and and Data science Bachelors
+Sereena Jency · TH Köln · Automation & IT · AI and Data Science
+
+---
+
+| Date | Day | Focus | Status |
+|------|-----|-------|--------|
+| 08.05.2026 | 01 | Environment setup + MCP | ✅ |
+| 09.05.2026 | 02 | First MCP tool | ✅ |
+| 10.05.2026 | 03 | Complete MCP server | ✅ |
+| 11.05.2026 | 04 | Connected agent to LLM | ✅ |
+| 12.05.2026 | 05 | Built 4-agent pipeline | ✅ |
+| 13.05.2026 | 06 | LangSmith + Streamlit UI + Deployment | ✅ |
 
 ---
 
 ## Day 01 · 08.05.2026
-**Focus:** Development environment + MCP architecture
+**Focus:** Environment setup + MCP architecture
 
 **Deliverables:**
-- GitHub Codespaces configured — Python 3.12.1
+- GitHub Codespaces running — Python 3.12.1
 - MCP Python SDK installed
-- MCP core primitives studied — Tools, Resources, Prompts
+- MCP core primitives understood — Tools, Resources, Prompts
 
 **Key Technical Decisions:**
-- Selected stdio transport for local development
-- Single MCP server will expose all tools — simpler agent connectivity
+- stdio transport selected for local development
+- Single MCP server will expose all tools — simpler connectivity
 
-**Blockers:** Information overload from official docs — resolved by
-filtering to project-relevant concepts only
+**Blockers:**
+- Official docs were overwhelming — resolved by filtering
+  to only project-relevant concepts
 
 ---
 
 ## Day 02 · 09.05.2026
-**Focus:** First MCP tool implementation
+**Focus:** First MCP tool from scratch
 
 **Deliverables:**
-- calculate() tool implemented from scratch
-- ClientSession test confirms tool discovery and execution
-- Renamed calculator_server.py → research_mcp_server.py
+- calculate() tool built and tested
+- ClientSession confirms tool discovery and execution
+- calculator_server.py renamed to research_mcp_server.py
 
 **Key Technical Decisions:**
-- @mcp.tool() decorator pattern adopted for all tools
-- Tool returns string type — consistent interface for all agents
+- @mcp.tool() decorator adopted for all tools going forward
+- Tool returns string — consistent interface for all agents
 - stdio transport confirmed working end to end
 
 **Blockers:** None
@@ -42,117 +54,97 @@ filtering to project-relevant concepts only
 **Focus:** Complete MCP server — all 3 tools
 
 **Deliverables:**
-- web_search() implemented via DuckDuckGo free API
-- fetch_url() implemented with HTML stripping via re module
+- web_search() built via DuckDuckGo free API
+- fetch_url() built with HTML stripping via re module
 - All 3 tools verified via test_server.py
 
 **Key Technical Decisions:**
-- User-Agent header added to bypass bot detection on requests
-- HTML stripping pipeline: remove scripts → remove styles →
-  remove tags → clean whitespace → return 2000 chars
+- User-Agent header added to bypass bot detection
+- HTML stripping pipeline: remove scripts → remove styles
+  → remove tags → clean whitespace → return 2000 chars
 - DuckDuckGo selected for zero-config testing phase
 
 **Known Issues:**
-- DuckDuckGo returns empty results for some specific queries
-
-**Planned:**
-- Upgrade web_search to Tavily API on Day 5
+- DuckDuckGo returns empty for some queries — Tavily upgrade planned
 
 ---
 
 ## Day 04 · 11.05.2026
-**Focus:** Connect MCP server to real AI agent
+**Focus:** Connecting MCP server to real AI agent
 
 **Deliverables:**
-- agent.py built — connects MCP tools to Groq LLM
+- agent.py built — MCP tools connected to Groq LLM
 - Agent correctly picks calculate for math questions
-- Agent correctly picks Tavily search for research questions
-- Tool results fed back to LLM via ToolMessage for final answer
+- Agent correctly picks Tavily for research questions
+- Tool results returned to LLM via ToolMessage for final answer
 
 **Key Technical Decisions:**
 - temperature=0 added for reliable tool call generation
-- Switched from DuckDuckGo to Tavily — built specifically for AI agents
-- TavilySearch replaces TavilySearchResults (deprecated in LangChain 1.x)
+- Switched from DuckDuckGo to Tavily — built for AI agents
+- TavilySearch replaces TavilySearchResults (deprecated in 1.x)
 
 **Blockers:**
+- LangChain 1.x removed AgentExecutor — rewrote agent approach
 - llama3-groq-70b-8192-tool-use-preview decommissioned by Groq
-- TavilySearchResults deprecated — migrated to langchain-tavily package
-
-**Planned:**
-- Day 5: LangGraph intro — build first graph node
+- TavilySearchResults deprecated — migrated to langchain-tavily
 
 ---
 
 ## Day 05 · 12.05.2026
-**Focus:** LangGraph multi-agent pipeline
+**Focus:** LangGraph 4-agent pipeline
 
 **Deliverables:**
 - research_graph.py built with 4 specialized agents
 - Planner breaks question into 3 sub-tasks
 - Searcher fetches web results for each sub-task
-- Analyst extracts 5 key insights from results
+- Analyst extracts 8 key insights from results
 - Writer produces structured professional report
 - Full pipeline tested end to end successfully
 
 **Key Technical Decisions:**
-- ResearchState TypedDict shared across all agents
+- ResearchState TypedDict shared across all 4 agents
 - Each agent reads state, does one job, writes back to state
 - LangGraph controls flow: Planner→Searcher→Analyst→Writer
 - set_entry_point and add_edge define the pipeline sequence
 
-**Self-tested:** 
+**Self-tested:**
 Pipeline verified with 3 different questions —
-ROS2, AI in robotics, LangChain vs LangGraph — all produced
-accurate structured reports
-
+ROS2, AI in robotics, LangChain vs LangGraph —
+all produced accurate structured reports
 
 **Blockers:** None
-
-**Planned:**
-- Day 6: Add LangSmith tracing to see every agent step
 
 ---
 
 ## Day 06 · 13.05.2026
-**Focus:** LangSmith observability and tracing
+**Focus:** LangSmith tracing + Streamlit UI + Deployment
 
 **Deliverables:**
-- LangSmith integrated into research_graph.py
-- All agent steps now visible in LangSmith dashboard
+- LangSmith integrated — all agent steps visible in dashboard
 - Trace confirmed: 0% error rate, 7.83s latency
-- Pipeline fully observable end to end
+- MARA.py built — full web interface for research pipeline
+- User can type any question and receive structured report
+- Progress shown during agent execution via st.status()
+- Sub-tasks and insights displayed in expandable sections
+- MARA deployed on Streamlit Cloud
+- App tested on mobile — works perfectly
 
 **Key Technical Decisions:**
 - LANGCHAIN_TRACING_V2 enables automatic tracing
-- Project name organizes traces by project in dashboard
-- LangSmith shows every LLM call, tool use, and agent decision
-
-**Blockers:** None
-
-**Planned:**
-- Day 7: Build Streamlit UI for the pipeline
-
----
-
-## Day 07 · 11.05.2026
-**Focus:** Streamlit UI — MARA web application
-
-**Deliverables:**
-- MARA.py built — full web interface for research pipeline
-- User can type any question and receive structured report
-- Progress status shown during agent execution
-- Sub-tasks and insights displayed in expandable sections
-- Final report rendered in clean markdown format
-
-**Key Technical Decisions:**
+- LangSmith project name organizes traces by project
 - st.status() shows live progress during 30 second pipeline
 - st.expander() organises sub-tasks and insights cleanly
-- Named MARA — Multi-Agent Research Assistant
-- Pipeline runs end to end inside Streamlit
+- st.secrets used for secure API key management on cloud
+- python-dotenv kept for local development
 
 **Blockers:**
 - KeyError on insights — fixed by using correct dictionary key
 - TypeError on list — fixed with isinstance check
+- requirements.txt missing s — fixed
+- os.getenv returning None on cloud — fixed with st.secrets.get()
 
-**Planned:**
-- Day 8: Deploy MARA on Streamlit Cloud with public URL
+**What I got out of this project:**
+Learned multiple frameworks from scratch in 6 days.
+Understood the skeleton of agentic AI by actually building it.
+Got comfortable debugging real production errors that
+tutorials never show you.
