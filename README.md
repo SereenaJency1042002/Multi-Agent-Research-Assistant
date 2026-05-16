@@ -136,4 +136,3 @@ Master's student — Automation and Information Technology
 TH Köln, Germany
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Sereena%20Jency-0077B5?style=flat&logo=linkedin)](https://linkedin.com/in/sereena-jency-711983301)
-[![GitHub](https://img.shields.io/badge/GitHub-SereenaJency1042002-181717?style=flat&logo=github)](https://github.com/SereenaJency1042002)
